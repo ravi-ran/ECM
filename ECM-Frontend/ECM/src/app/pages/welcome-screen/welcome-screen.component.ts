@@ -86,16 +86,20 @@ export class WelcomeScreenComponent implements OnInit {
   loginManager() {
     const loginObj: LoginData = this.getLoginData();
     this.accountService.login(loginObj).subscribe((response: boolean) => {
+
       this.accountService.isLoggedIn = response;
-      this.messageService.add({
-        severity: 'success', summary: 'Success', detail: 'Successfully Logged In', key: 'login-toast'
-      });
-      this.router.navigate(['/employee']);
-    },
-      (error) => {
-        console.log('Error while logging - ');
-        console.error(error);
-      })
+      if (this.accountService.isLoggedIn) {
+        this.messageService.add({
+          severity: 'success', summary: 'Success', detail: 'Successfully Logged In', key: 'login-toast'
+        });
+        this.router.navigate(['/employee']);
+      } else {
+        this.messageService.add({
+          severity: 'error', summary: 'Error', detail: 'Please check Email/Password', key: 'login-toast'
+        });
+      }
+
+    })
 
   }
 
