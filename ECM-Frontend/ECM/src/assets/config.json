@@ -1,0 +1,5 @@
+{
+    "managerLogin" : "manager/login",
+    "addNewManager" : "manager/add",
+    "employee" : "employee/"
+}

@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+.employee-table {
+    .p-datatable {
+        position: relative;
+        width: 120vh;
+        max-height: 80vh;
+        overflow: scroll;
+        border-radius: 15px 15px 15px 15px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+}
+
+.alert-danger {
+    color: rgb(141, 12, 12);
+    font-size: 15px;
+}
+
+form {
+	background-color: #FFFFFF;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 50px;
+	height: 100%;
+	text-align: center;
+}
+
+input {
+	background-color: #eee;
+	border: none;
+	padding: 12px 15px;
+	margin: 8px 0;
+	width: 100%;
+}
+
+button {
+	border-radius: 20px;
+	border: 1px solid rgba(43, 255, 255, 0.836);
+	background-color: rgb(38, 211, 211);
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}

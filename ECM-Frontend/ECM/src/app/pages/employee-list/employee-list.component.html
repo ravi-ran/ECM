@@ -1,0 +1,71 @@
+<div class="employee-list-body">
+    <div class="root-container">
+        <div class="table-container">
+            <div class="add-employee-btn">
+                <button (click) = 'createEmployeeForm()'>Add Employee</button>
+            </div>
+            <p-table #dt [value] = 'employeeList' *ngIf = 'isEmployeeListTableReady' class="employee-table">
+                <ng-template pTemplate = 'header'>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Address</th>
+                        <th>Date of Birth</th>
+                        <th>Contact</th>
+                        <th>City</th>
+                        <th>Options</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate = 'body' let-employee>
+                    <tr>
+                        <td>{{employee.firstName}} </td>
+                        <td>{{employee.lastName}} </td>
+                        <td>{{employee.address}} </td>
+                        <td>{{employee.dob}} </td>
+                        <td>{{employee.mobile}} </td>
+                        <td>{{employee.city}} </td>
+                        <td>
+                            <i class="pi pi-user-edit" (click) = 'editEmployee(employee)'></i>
+                            <i class="pi pi-trash" (click) = 'deleteEmployee(employee)'></i>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+<p-dialog header = 'Add/Edit Employee' [(visible)] = 'isEmployeeFormReady' [modal] = 'true' [draggable] = 'false' [resizable] = 'false'>
+    <div class="employee-form" *ngIf = 'isEmployeeFormReady'>
+        <form [formGroup] = "employeeForm">
+            <div>
+                <input type="text" formControlName = 'firstName' placeholder="First Name">
+                <span *ngIf = 'firstName.invalid && (firstName.touched || firstName.dirty)' class="alert-danger">
+                    <sup>*</sup>First Name is required.
+                </span>
+            </div>
+            <div>
+                <input type="text" formControlName = 'lastName' placeholder="Last Name">
+                <span *ngIf = 'lastName.invalid && (lastName.touched || lastName.dirty)' class="alert-danger">
+                    <sup>*</sup>Last Name is required.
+                </span>
+            </div>
+            <div>
+                <input type="text" formControlName = 'address' placeholder="Address">
+            </div>
+            <div>
+                <p-inputMask formControlName="dob" mask="99/99/9999" slotChar = "dd/mm/yyyy" placeholder = "99/99/9999"></p-inputMask>
+            </div>
+            <div>
+                <p-inputMask formControlName="contact" mask="(+99) 9999999999" placeholder = "+91 99999999999"></p-inputMask>
+            </div>
+            <div>
+                <input type="text" formControlName = 'city' placeholder="City">
+            </div>
+            <div>
+                <button (click) = "modifyEmployee()" [disabled] = "employeeForm.invalid" >Add/Edit Employee</button>
+            </div>
+        </form>
+    </div>
+</p-dialog>
+<p-toast position="bottom-center" key = "employee-toast"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

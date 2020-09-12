@@ -1,0 +1,17 @@
+.employee-list-body {    
+	background: -webkit-linear-gradient(to right, rgb(32, 175, 201), rgb(35, 75, 187));
+	background: linear-gradient(to right, rgb(37, 183, 209), rgb(24, 168, 187));
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.add-employee-btn {
+    float: right;
+}
+
+.pi-user-edit {
+    margin: 15px;
+}
