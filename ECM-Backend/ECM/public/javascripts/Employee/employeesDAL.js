@@ -11,6 +11,15 @@ employeeDAL.fetchAllEmployee = async () => {
     }
 }
 
+employeeDAL.fetchEmployeeById = async (empId) => {
+    try {
+        const employee = await facade.models.employee.findOne({empId: empId});
+        return employee;
+    } catch (error) {
+        return error;
+    }
+}
+
 employeeDAL.addEmployee = (employee) => {
     return facade.models.employee.create({
         firstName: employee.empFirstName,
@@ -41,6 +50,18 @@ employeeDAL.updateEmploye = async (employeeObj) => {
         return employeeToBeUpdated;
     } catch (error) {
         return error;
+    }
+}
+
+employeeDAL.deleteEmployee = async (id) => {
+    try {
+        const isDeleted = await facade.models.employee.deleteOne({empId: id});
+        if(isDeleted) {
+            return true;
+        }
+        return false;
+    } catch (error) {
+        throw error;
     }
 }
 

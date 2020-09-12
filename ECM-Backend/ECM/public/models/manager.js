@@ -5,15 +5,15 @@ const managerSchema = new mongoose.Schema(
     {
         email: {
             type: String,
-            unique: true,
             required: true
         },
         firstName: {
             type: String,
-            required: true,
+            required: true
         },
         lastName: {
             type: String,
+            required: true
         },
         password: {
             type: String,
@@ -34,8 +34,9 @@ const managerSchema = new mongoose.Schema(
     }
 );
 
-autoIncrement.initialize(mongoose.connection);
+
 try {
+    autoIncrement.initialize(mongoose.connection);
     managerSchema.plugin(autoIncrement.plugin, {model:'Manager', field: 'mId', startAt: 1, incrementBy: 1});
 } catch (error) {
     console.log(error);    

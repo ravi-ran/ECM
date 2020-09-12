@@ -5,6 +5,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const cors = require('cors');
 const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
@@ -21,6 +22,7 @@ const eraseDbOnSync = true;         //to re-initialse db on every server start.
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -49,18 +51,26 @@ app.use(function(err, req, res, next) {
 
 
 facade.connectDB().then(async () => {
-  if(eraseDbOnSync) {
+  try {
+    if(eraseDbOnSync) {
+      await facade.models.employee.init();
+      await facade.models.manager.init();
 
-    await facade.models.employee.collection.drop();
-
-    //initialising employee and manager table
-    facade.initialiseDB.initialiseEmployee();
-    facade.initialiseDB.initialiseManager();
-
+      await facade.models.employee.collection.drop();
+      await facade.models.manager.collection.drop();
+      //initialising employee and manager table
+      await facade.initialiseDB.initialiseEmployee();
+      await facade.initialiseDB.initialiseManager();
+  
+    }
+    app.listen(5000, () => {
+      console.log('***************app is running and connected to mongoose*****************');
+    });
+  } catch (error) {
+    console.log('Error in connect DB app.js');
+    console.log(error);    
   }
-  app.listen(5000, () => {
-    console.log('***************app is running and connected to mongoose*****************');
-  })
+
 })
 
 module.exports = app;

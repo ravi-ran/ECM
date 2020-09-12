@@ -9,7 +9,7 @@ managerBL.checkManager = (req) => {
     return managerDAL.checkManager(managerJSON);
 }
 
-managerBL.addManager = (req) => {
+managerBL.addManager = async (req) => {
     const managerJSON = {
         'firstName': req.body.firstName,
         'lastName': req.body.lastName,
@@ -19,8 +19,22 @@ managerBL.addManager = (req) => {
         'dob': req.body.dob,
         'company': req.body.company
     };
-    return managerDAL.addManager(managerJSON);
+
+    try {
+        const managerRes = await managerDAL.addManager(managerJSON);
+        return managerRes;
+    } catch (error) {
+        console.log('error inside manager bl add');
+        console.log(error);
+        throw error;
+    }
+    
+
 }
 
+
+managerBL.getAllManager = () => {
+    return managerDAL.getAllManager();
+}
 
 module.exports = managerBL;

@@ -31,8 +31,9 @@ const employeeSchema = new mongoose.Schema(
 
 
 
-autoIncrement.initialize(mongoose.connection);
+
 try {
+    autoIncrement.initialize(mongoose.connection);
     employeeSchema.plugin(autoIncrement.plugin, {model:'Employee', field: 'empId', startAt: 1, incrementBy: 1});
 } catch (error) {
     console.log(error);    

@@ -9,7 +9,7 @@ const initialiseDB = require('./dbScript');
 const url = "mongodb://localhost:27017/ECM_DB";
 
 const connectDB = () => {
-    return mongoose.connect(url , {useNewUrlParser: true});
+    return mongoose.connect(url , {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 };
 
 
