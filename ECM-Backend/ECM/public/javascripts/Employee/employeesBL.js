@@ -25,13 +25,15 @@ employeeBL.addEmployee = (req) => {
 employeeBL.updateEmployee = (req) => {
     const employeeJson = {
         'empId': req.body.empId,
-        'empFirstName': req.body.empFirstName,
-        'empLastName': req.body.empLastName,
-        'empAddress': req.body.empAddress,
-        'empDob': req.body.empDob,
-        'empMobile': req.body.empMobile,
-        'empCity': req.body.empCity
+        'empFirstName': req.body.firstName,
+        'empLastName': req.body.lastName,
+        'empAddress': req.body.address,
+        'empDob': req.body.dob,
+        'empMobile': req.body.mobile,
+        'empCity': req.body.city
     };
+    console.log(employeeJson);
+    
     return employeeDAL.updateEmploye(employeeJson);
 }
 
